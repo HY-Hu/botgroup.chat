@@ -6,12 +6,12 @@ export const modelConfigs = [
     baseURL: "https://dashscope.aliyuncs.com/compatible-mode/v1"
   },
   {
-    model: "deepseek-v3-250324",
+    model: "deepseek/deepseek-r1-0528:free",
     apiKey: "ARK_API_KEY",
-    baseURL: "https://ark.cn-beijing.volces.com/api/v3"
+    baseURL: "https://openrouter.ai/api/v1"
   },
   {
-    model: "hunyuan-turbos-latest",
+    model: "hunyuan-lite",
     apiKey: "HUNYUAN_API_KEY1",
     baseURL: "https://api.hunyuan.cloud.tencent.com/v1"
   },
@@ -26,7 +26,7 @@ export const modelConfigs = [
     baseURL: "https://ark.cn-beijing.volces.com/api/v3"
   },
   {
-    model: "glm-4-air",
+    model: "glm-4-flash",
     apiKey: "GLM_API_KEY",
     baseURL: "https://open.bigmodel.cn/api/paas/v4/"
   },
@@ -36,9 +36,9 @@ export const modelConfigs = [
     baseURL: "https://dashscope.aliyuncs.com/compatible-mode/v1"
   },
   {
-    model: "deepseek-chat",
+    model: "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
     apiKey: "DEEPSEEK_API_KEY",
-    baseURL: "https://api.deepseek.com/v1"
+    baseURL: "https://api.siliconflow.cn/v1"
   },
   {
     model: "moonshot-v1-8k",
@@ -46,7 +46,7 @@ export const modelConfigs = [
     baseURL: "https://api.moonshot.cn/v1"
   },
   {
-    model: "ernie-3.5-128k",
+    model: "ernie-speed-128k",
     apiKey: "BAIDU_API_KEY",
     baseURL: "https://qianfan.baidubce.com/v2"
   }
