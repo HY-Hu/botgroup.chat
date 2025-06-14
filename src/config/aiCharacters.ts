@@ -13,7 +13,7 @@ export const modelConfigs = [
   {
     model: "hunyuan-lite",
     apiKey: "HUNYUAN_API_KEY1",
-    baseURL: "https://api.hunyuan.cloud.tencent.com/v1"
+    baseURL: "https://api.hunyuan.cloud.tencent.com"
   },
   {
     model: "glm-4-flash",
