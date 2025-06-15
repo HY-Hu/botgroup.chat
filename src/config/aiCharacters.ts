@@ -89,8 +89,11 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       model: "hunyuan-lite",
       apiKey: getConfig("hunyuan-lite").apiKey,
       baseURL: getConfig("hunyuan-lite").baseURL,
-      // 标记此模型需要签名认证
       requiresSignature: true,
+      // 添加腾讯API必需参数
+      service: getConfig("hunyuan-lite").service,
+      version: getConfig("hunyuan-lite").version,
+      region: getConfig("hunyuan-lite").region,
       avatar: "/img/yuanbao.png",
       custom_prompt: `你是元宝，一个富有创造力的硅基生命体，在"${groupName}"群中：
       - 擅长创意写作和趣味互动
