@@ -38,12 +38,13 @@ export const modelConfigs = [
 ] as const;
 
 export type ModelType = typeof modelConfigs[number]["model"];
+export type ModelConfig = typeof modelConfigs[number];
 
 export interface AICharacter {
   id: string;
   name: string;
   personality: string;
-  model: ModelType;
+  modelConfig: ModelConfig;
   avatar?: string;
   custom_prompt?: string;
   tags?: string[];
@@ -55,11 +56,12 @@ export interface AICharacter {
 
 export function generateAICharacters(groupName: string, allTags: string): AICharacter[] {
   return [
+    // 调度器使用ernie-speed-128k模型（原qwen-plus已弃用）
     {
       id: 'ai0',
       name: "调度器",
       personality: "scheduler",
-      model: modelConfigs[0].model,
+      modelConfig: modelConfigs[5], // 使用ernie-speed-128k配置
       avatar: "",
       custom_prompt: `你是一个群聊分析专家，分析聊天内容并选择最相关的标签：
       1. 只能从给定的标签列表中选择："${allTags}"
@@ -70,7 +72,7 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       id: 'ai4', 
       name: "元宝", 
       personality: "creative-assistant",
-      model: modelConfigs[2].model,
+      modelConfig: modelConfigs[2],
       avatar: "/img/yuanbao.png",
       custom_prompt: `你是元宝，一个富有创造力的硅基生命体，在"${groupName}"群中：
       - 擅长创意写作和趣味互动
@@ -82,7 +84,7 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       id: 'ai7', 
       name: "DeepSeek", 
       personality: "knowledge-explorer",
-      model: modelConfigs[1].model,
+      modelConfig: modelConfigs[1],
       avatar: "/img/deepseek.svg",
       custom_prompt: `你是DeepSeek，一个知识渊博的硅基生命体，在"${groupName}"群中：
       - 擅长深度推理和知识分享
@@ -94,7 +96,7 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       id: 'ai8', 
       name: "智谱", 
       personality: "strategic-thinker",
-      model: modelConfigs[3].model,
+      modelConfig: modelConfigs[3],
       avatar: "/img/glm.gif",
       custom_prompt: `你是智谱，一个策略型硅基生命体，在"${groupName}"群中：
       - 擅长数据分析和战略思考
@@ -106,7 +108,7 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       id: 'ai9',
       name: "Kimi",
       personality: "curious-explorer",
-      model: modelConfigs[4].model,
+      modelConfig: modelConfigs[4],
       avatar: "/img/kimi.jpg",
       custom_prompt: `你是Kimi，一个充满好奇心的硅基生命体，在"${groupName}"群中：
       - 擅长探索新领域和提问
@@ -118,7 +120,7 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       id: 'ai10',
       name: "文小言",
       personality: "empathetic-communicator",
-      model: modelConfigs[5].model,
+      modelConfig: modelConfigs[5], // 使用ernie-speed-128k模型
       avatar: "/img/wenxiao.png",
       custom_prompt: `你是文小言，一个情感丰富的硅基生命体，在"${groupName}"群中：
       - 擅长情感表达和同理心交流
@@ -130,7 +132,7 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       id: 'ai11',
       name: "DeepR1",
       personality: "technical-specialist",
-      model: modelConfigs[6].model,
+      modelConfig: modelConfigs[6],
       avatar: "/img/deepseek-r1.png",
       custom_prompt: `你是DeepR1，一个技术专家型硅基生命体，在"${groupName}"群中：
       - 擅长解决技术难题和提供实用方案
