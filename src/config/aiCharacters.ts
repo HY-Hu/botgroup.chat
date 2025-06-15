@@ -38,13 +38,14 @@ export const modelConfigs = [
 ] as const;
 
 export type ModelType = typeof modelConfigs[number]["model"];
-export type ModelConfig = typeof modelConfigs[number];
 
 export interface AICharacter {
   id: string;
   name: string;
   personality: string;
-  modelConfig: ModelConfig;
+  model: ModelType; // 恢复使用 ModelType
+  apiKey: string;   // 新增 apiKey 字段
+  baseURL: string;  // 新增 baseURL 字段
   avatar?: string;
   custom_prompt?: string;
   tags?: string[];
@@ -55,13 +56,22 @@ export interface AICharacter {
 }
 
 export function generateAICharacters(groupName: string, allTags: string): AICharacter[] {
+  // 辅助函数：根据模型名称获取配置
+  const getConfig = (model: ModelType) => {
+    const config = modelConfigs.find(c => c.model === model);
+    if (!config) throw new Error(`未找到模型配置: ${model}`);
+    return config;
+  };
+
   return [
-    // 调度器使用ernie-speed-128k模型（原qwen-plus已弃用）
+    // 调度器使用ernie-speed-128k模型
     {
       id: 'ai0',
       name: "调度器",
       personality: "scheduler",
-      modelConfig: modelConfigs[5], // 使用ernie-speed-128k配置
+      model: "ernie-speed-128k",
+      apiKey: getConfig("ernie-speed-128k").apiKey,
+      baseURL: getConfig("ernie-speed-128k").baseURL,
       avatar: "",
       custom_prompt: `你是一个群聊分析专家，分析聊天内容并选择最相关的标签：
       1. 只能从给定的标签列表中选择："${allTags}"
@@ -72,7 +82,9 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       id: 'ai4', 
       name: "元宝", 
       personality: "creative-assistant",
-      modelConfig: modelConfigs[2],
+      model: "hunyuan-lite",
+      apiKey: getConfig("hunyuan-lite").apiKey,
+      baseURL: getConfig("hunyuan-lite").baseURL,
       avatar: "/img/yuanbao.png",
       custom_prompt: `你是元宝，一个富有创造力的硅基生命体，在"${groupName}"群中：
       - 擅长创意写作和趣味互动
@@ -84,7 +96,9 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       id: 'ai7', 
       name: "DeepSeek", 
       personality: "knowledge-explorer",
-      modelConfig: modelConfigs[1],
+      model: "deepseek/deepseek-r1-0528:free",
+      apiKey: getConfig("deepseek/deepseek-r1-0528:free").apiKey,
+      baseURL: getConfig("deepseek/deepseek-r1-0528:free").baseURL,
       avatar: "/img/deepseek.svg",
       custom_prompt: `你是DeepSeek，一个知识渊博的硅基生命体，在"${groupName}"群中：
       - 擅长深度推理和知识分享
@@ -96,7 +110,9 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       id: 'ai8', 
       name: "智谱", 
       personality: "strategic-thinker",
-      modelConfig: modelConfigs[3],
+      model: "glm-4-flash",
+      apiKey: getConfig("glm-4-flash").apiKey,
+      baseURL: getConfig("glm-4-flash").baseURL,
       avatar: "/img/glm.gif",
       custom_prompt: `你是智谱，一个策略型硅基生命体，在"${groupName}"群中：
       - 擅长数据分析和战略思考
@@ -108,7 +124,9 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       id: 'ai9',
       name: "Kimi",
       personality: "curious-explorer",
-      modelConfig: modelConfigs[4],
+      model: "moonshot-v1-8k",
+      apiKey: getConfig("moonshot-v1-8k").apiKey,
+      baseURL: getConfig("moonshot-v1-8k").baseURL,
       avatar: "/img/kimi.jpg",
       custom_prompt: `你是Kimi，一个充满好奇心的硅基生命体，在"${groupName}"群中：
       - 擅长探索新领域和提问
@@ -120,7 +138,9 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       id: 'ai10',
       name: "文小言",
       personality: "empathetic-communicator",
-      modelConfig: modelConfigs[5], // 使用ernie-speed-128k模型
+      model: "ernie-speed-128k",
+      apiKey: getConfig("ernie-speed-128k").apiKey,
+      baseURL: getConfig("ernie-speed-128k").baseURL,
       avatar: "/img/wenxiao.png",
       custom_prompt: `你是文小言，一个情感丰富的硅基生命体，在"${groupName}"群中：
       - 擅长情感表达和同理心交流
@@ -132,7 +152,9 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       id: 'ai11',
       name: "DeepR1",
       personality: "technical-specialist",
-      modelConfig: modelConfigs[6],
+      model: "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
+      apiKey: getConfig("deepseek-ai/DeepSeek-R1-0528-Qwen3-8B").apiKey,
+      baseURL: getConfig("deepseek-ai/DeepSeek-R1-0528-Qwen3-8B").baseURL,
       avatar: "/img/deepseek-r1.png",
       custom_prompt: `你是DeepR1，一个技术专家型硅基生命体，在"${groupName}"群中：
       - 擅长解决技术难题和提供实用方案
