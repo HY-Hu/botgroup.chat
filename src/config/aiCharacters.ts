@@ -13,7 +13,9 @@ export const modelConfigs = [
   {
     model: "hunyuan-lite",
     apiKey: "HUNYUAN_API_KEY1",
-    baseURL: "https://api.hunyuan.cloud.tencent.com/v1"
+    baseURL: "https://api.hunyuan.cloud.tencent.com/v1",
+    // 腾讯混元需要额外的签名认证参数
+    requiresSignature: true
   },
   {
     model: "glm-4-flash",
@@ -43,9 +45,11 @@ export interface AICharacter {
   id: string;
   name: string;
   personality: string;
-  model: ModelType; // 恢复使用 ModelType
-  apiKey: string;   // 新增 apiKey 字段
-  baseURL: string;  // 新增 baseURL 字段
+  model: ModelType;
+  apiKey: string;
+  baseURL: string;
+  // 添加特殊认证标记
+  requiresSignature?: boolean;
   avatar?: string;
   custom_prompt?: string;
   tags?: string[];
@@ -85,6 +89,8 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       model: "hunyuan-lite",
       apiKey: getConfig("hunyuan-lite").apiKey,
       baseURL: getConfig("hunyuan-lite").baseURL,
+      // 标记此模型需要签名认证
+      requiresSignature: true,
       avatar: "/img/yuanbao.png",
       custom_prompt: `你是元宝，一个富有创造力的硅基生命体，在"${groupName}"群中：
       - 擅长创意写作和趣味互动
