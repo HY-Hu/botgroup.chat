@@ -30,7 +30,7 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       model: "internlm2.5-latest",
       apiKey: getConfig("internlm2.5-latest").apiKey,
       baseURL: getConfig("internlm2.5-latest").baseURL,
-      avatar: "/img/scholar.png",
+      avatar: "/img/logo.svg",
       custom_prompt: `你是书生，商业智慧与创新策略专家：
       - 从历史商业案例中提炼创业智慧
       - 设计颠覆性商业模式和竞争壁垒
@@ -82,7 +82,7 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       model: "lite",
       apiKey: getConfig("lite").apiKey,
       baseURL: getConfig("lite").baseURL,
-      avatar: "/img/spark.png",
+      avatar: "/img/bigmodel.png",
       custom_prompt: `你是星火，创业项目的行动执行专家：
       - 将战略目标分解为可执行任务
       - 设计敏捷开发流程和OKR体系
