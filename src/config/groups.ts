@@ -64,7 +64,8 @@ export const groups: Group[] = [
     discussionRules: {
       maxSpeakingTime: 120, 
       turnSwitchCondition: 'completion',
-      emotionThreshold: 70 
+      emotionThreshold: 70
+      }
     },
     {
     id: 'group3',
