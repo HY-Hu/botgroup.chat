@@ -39,9 +39,68 @@ function generateSpeakingOrder(phase: Group['discussionPhase'], members: string[
 export const groups: Group[] = [
   {
     id: 'group1',
-    name: '🚀 创业智囊团',
+    name: '🚀 创业智囊团1',
     description: '动态发言系统：战略规划→创新突破→技术实现→执行落地→复盘评估',
-    members: ['ai8', 'ai7', 'ai10', 'ai11', 'ai4', 'ai9'], 
+    members: ['ai8', 'ai4', 'ai7', 'ai9', 'ai11', 'ai10'], 
+    speakingOrder: [], 
+    currentSpeakerIndex: 0,
+    discussionPhase: 'strategic',
+    isGroupDiscussionMode: true,
+    discussionRules: {
+      maxSpeakingTime: 120, 
+      turnSwitchCondition: 'completion',
+      emotionThreshold: 70 
+    }
+  },
+  {
+    id: 'group2',
+    name: '🚀 创业智囊团2',
+    description: '动态发言系统：战略规划→创新突破→技术实现→执行落地→复盘评估',
+    members: ['ai4', 'ai8', 'ai10', 'ai7', 'ai9', 'ai11'], 
+    speakingOrder: [], 
+    currentSpeakerIndex: 0,
+    discussionPhase: 'strategic',
+    isGroupDiscussionMode: true,
+    discussionRules: {
+      maxSpeakingTime: 120, 
+      turnSwitchCondition: 'completion',
+      emotionThreshold: 70 
+    },
+    {
+    id: 'group3',
+    name: '🚀 创业智囊团3',
+    description: '动态发言系统：战略规划→创新突破→技术实现→执行落地→复盘评估',
+    members: ['ai7', 'ai11', 'ai9', 'ai8', 'ai4', 'ai10'], 
+    speakingOrder: [], 
+    currentSpeakerIndex: 0,
+    discussionPhase: 'strategic',
+    isGroupDiscussionMode: true,
+    discussionRules: {
+      maxSpeakingTime: 120, 
+      turnSwitchCondition: 'completion',
+      emotionThreshold: 70 
+    }
+  },
+  {
+    id: 'group4',
+    name: '🚀 创业智囊团4',
+    description: '动态发言系统：战略规划→创新突破→技术实现→执行落地→复盘评估',
+    members: ['ai9', 'ai11', 'ai7', 'ai8', 'ai4', 'ai10'], 
+    speakingOrder: [], 
+    currentSpeakerIndex: 0,
+    discussionPhase: 'strategic',
+    isGroupDiscussionMode: true,
+    discussionRules: {
+      maxSpeakingTime: 120, 
+      turnSwitchCondition: 'completion',
+      emotionThreshold: 70 
+    }
+  },
+  {
+    id: 'group5',
+    name: '🚀 创业智囊团5',
+    description: '动态发言系统：战略规划→创新突破→技术实现→执行落地→复盘评估',
+    members: ['ai10', 'ai8', 'ai4', 'ai7', 'ai9', 'ai11'], 
     speakingOrder: [], 
     currentSpeakerIndex: 0,
     discussionPhase: 'strategic',
