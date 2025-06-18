@@ -1,5 +1,4 @@
 // ...（模型配置保持不变，已包含书生和星火模型)
-
 export function generateAICharacters(groupName: string, allTags: string): AICharacter[] {
   // 辅助函数：根据模型名称获取配置
   const getConfig = (model: ModelType) => {
