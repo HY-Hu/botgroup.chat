@@ -15,7 +15,6 @@ export interface Group {
     emotionThreshold: number; // 情感支持触发阈值(0-100)
   };
 }
-
 // 发言顺序生成器
 function generateSpeakingOrder(phase: Group['discussionPhase'], members: string[]): string[] {
   // 基础顺序映射
