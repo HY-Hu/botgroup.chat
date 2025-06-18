@@ -7,7 +7,6 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
     if (!config) throw new Error(`未找到模型配置: ${model}`);
     return config;
   };
-
   return [
     // 战略调度官 - 优化为商业决策分析
     {
