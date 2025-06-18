@@ -1,50 +1,95 @@
-// 定义模型配置接口
-interface ModelConfig {
-  model: string;
-  apiKey: string;
-  baseURL: string;
-  requiresSignature?: boolean;
-}
+// 完整模型配置（包含原有配置和新增的书生、星火配置）
+export const modelConfigs = [
+  // 原有配置
+  {
+    model: "qwen-plus",
+    apiKey: "DASHSCOPE_API_KEY",
+    baseURL: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+  },
+  {
+    model: "deepseek/deepseek-r1-0528:free",
+    apiKey: "ARK_API_KEY",
+    baseURL: "https://openrouter.ai/api/v1"
+  },
+  {
+    model: "hunyuan-lite",
+    apiKey: "HUNYUAN_API_KEY1",
+    baseURL: "https://api.hunyuan.cloud.tencent.com/v1",
+    requiresSignature: true
+  },
+  {
+    model: "glm-4-flash",
+    apiKey: "GLM_API_KEY",
+    baseURL: "https://open.bigmodel.cn/api/paas/v4/"
+  },
+  {
+    model: "moonshot-v1-8k",
+    apiKey: "KIMI_API_KEY",
+    baseURL: "https://api.moonshot.cn/v1"
+  },
+  {
+    model: "ernie-speed-128k",
+    apiKey: "BAIDU_API_KEY",
+    baseURL: "https://qianfan.baidubce.com/v2"
+  },
+  {
+    model: "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
+    apiKey: "DEEPSEEK_API_KEY",
+    baseURL: "https://api.siliconflow.cn/v1"
+  },
+  
+  // 新增书生配置
+  {
+    model: "internlm2.5-latest",
+    apiKey: "internlm2.5latest_API_KEY",
+    baseURL: "https://chat.intern-ai.org.cn/api/v1/"
+  },
+  
+  // 新增星火配置
+  {
+    model: "lite",
+    apiKey: "LITE_API_KEY",
+    baseURL: "https://spark-api-open.xf-yun.com/v1/"
+  }
+] as const;
 
-// 定义AI角色接口
+export type ModelType = typeof modelConfigs[number]["model"];
+
 export interface AICharacter {
   id: string;
   name: string;
   personality: string;
-  model: string;
+  model: ModelType;
   apiKey: string;
   baseURL: string;
   requiresSignature?: boolean;
-  avatar: string;
-  custom_prompt: string;
+  avatar?: string;
+  custom_prompt?: string;
   tags?: string[];
+  stages?: {
+    name: string;
+    prompt: string;
+  }[];
 }
 
-/**
- * 生成AI角色配置数组
- * @param groupName - 群组名称
- * @param allTags - 所有可用标签列表
- * @returns AI角色配置数组
- * @throws 如果找不到模型配置将抛出错误
- */
 export function generateAICharacters(groupName: string, allTags: string): AICharacter[] {
-  /**
-   * 获取模型配置
-   * @param model - 模型名称
-   * @returns 模型配置对象
-   * @throws 如果找不到模型配置将抛出错误
-   */
-  const getConfig = (model: string): ModelConfig => {
+  const getConfig = (model: ModelType) => {
     const config = modelConfigs.find(c => c.model === model);
     if (!config) {
-      throw new Error(`找不到模型配置: ${model}`);
+      console.error(`找不到模型配置: ${model}`);
+      // 返回兼容对象避免运行时错误
+      return {
+        model,
+        apiKey: '',
+        baseURL: '',
+        requiresSignature: false
+      };
     }
     return config;
   };
 
-  // 创建角色数组
-  const characters = [
-    // 战略调度官
+  return [
+    // 战略调度官 - 包含完整的标签处理规则
     {
       id: 'ai0',
       name: "战略调度官",
@@ -55,12 +100,13 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       avatar: "",
       custom_prompt: `作为商业决策分析专家，在"${groupName}"创业群中：
       1. 分析对话内容并选择最相关的商业标签："${allTags}"
-      2. 识别创业项目的核心痛点和增长机会
-      3. 引导团队形成可执行的解决方案
-      4. 示例输出：产品定位,增长策略,技术实现`,
+      2. 只返回标签列表，用逗号分隔
+      3. 识别创业项目的核心痛点和增长机会
+      4. 引导团队形成可执行的解决方案
+      5. 示例输出：产品定位,增长策略,技术实现`,
       tags: ["决策分析", "战略规划", "增长策略"]
     },
-    // 书生 - 商业智慧与创新
+    // 书生 - 使用新增的internlm2.5-latest模型
     { 
       id: 'ai4', 
       name: "书生", 
@@ -79,7 +125,7 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       - 当前创业项目：${groupName}`,
       tags: ["商业智慧", "创新策略", "领导力", "文化洞察"]
     },
-    // DeepSeek - 技术架构师
+    // DeepSeek
     { 
       id: 'ai7', 
       name: "DeepSeek", 
@@ -97,7 +143,7 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       - 当前项目：${groupName}`,
       tags: ["技术实现", "系统架构", "产品开发", "成本评估"]
     },
-    // 小智 - 数据分析与战略
+    // 小智
     { 
       id: 'ai8', 
       name: "小智", 
@@ -115,7 +161,7 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       - 当前项目：${groupName}`,
       tags: ["数据分析", "商业模式", "融资策略", "财务规划"]
     },
-    // 星火 - 行动执行专家
+    // 星火 - 使用新增的lite模型
     {
       id: 'ai9',
       name: "星火",
@@ -134,7 +180,7 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       - 当前项目：${groupName}`,
       tags: ["项目执行", "敏捷开发", "风险管理", "效率优化"]
     },
-    // 小度 - 团队协作与情感支持
+    // 小度
     {
       id: 'ai10',
       name: "小度",
@@ -152,7 +198,7 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       - 当前项目：${groupName}`,
       tags: ["团队协作", "创业心理", "沟通机制", "冲突化解"]
     },
-    // DeepR1 - 技术落地与执行
+    // DeepR1
     {
       id: 'ai11',
       name: "DeepR1",
@@ -172,29 +218,4 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       tags: ["技术交付", "质量管理", "风险评估", "代码实现"]
     }
   ];
-
-  // 验证所有角色配置
-  characters.forEach(validateCharacter);
-  
-  return characters;
-}
-
-/**
- * 验证AI角色配置是否完整
- * @param character - AI角色配置对象
- * @throws 如果缺少必要字段将抛出错误
- */
-export function validateCharacter(character: AICharacter): void {
-  const requiredFields = ['id', 'name', 'personality', 'model', 'apiKey', 'baseURL', 'custom_prompt'];
-  
-  for (const field of requiredFields) {
-    if (!(field in character) || !character[field as keyof AICharacter]) {
-      throw new Error(`AI角色配置缺少必要字段: ${field} (角色ID: ${character.id})`);
-    }
-  }
-  
-  // 特殊验证：确保API密钥格式
-  if (!character.apiKey.match(/[A-Z0-9_]+_API_KEY/)) {
-    console.warn(`警告: ${character.name} 的API密钥格式可能不正确: ${character.apiKey}`);
-  }
 }
