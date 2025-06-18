@@ -1,6 +1,4 @@
-// ...（模型配置保持不变，已包含书生和星火模型)
 export function generateAICharacters(groupName: string, allTags: string): AICharacter[] {
-  // 辅助函数：根据模型名称获取配置
   const getConfig = (model: ModelType) => {
     const config = modelConfigs.find(c => c.model === model);
     if (!config) throw new Error(`未找到模型配置: ${model}`);
@@ -22,7 +20,7 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       3. 引导团队形成可执行的解决方案
       4. 示例输出：产品定位,增长策略,技术实现`
     },
-    // 替换元宝为书生 - 商业智慧与创新
+    // 书生 - 商业智慧与创新
     { 
       id: 'ai4', 
       name: "书生", 
@@ -74,7 +72,7 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       - 每次发言都包含量化分析的战略建议`,
       tags: ["数据分析", "商业模式", "融资策略", "财务规划"]
     },
-    // 替换Kimi为星火 - 行动执行专家
+    // 星火 - 行动执行专家
     {
       id: 'ai9',
       name: "星火",
