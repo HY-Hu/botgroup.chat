@@ -10,20 +10,20 @@ export interface Group {
   // 新增讨论模式增强
   isGroupDiscussionMode: boolean;
   discussionRules?: {
-    maxSpeakingTime: number; // 单次发言最长时间(秒)
-    turnSwitchCondition: 'time' | 'completion' | 'interruption'; // 切换条件
-    emotionThreshold: number; // 情感支持触发阈值(0-100)
+    maxSpeakingTime: number; 
+    turnSwitchCondition: 'time' | 'completion' | 'interruption';
+    emotionThreshold: number; 
   };
 }
 // 发言顺序生成器
 function generateSpeakingOrder(phase: Group['discussionPhase'], members: string[]): string[] {
   // 基础顺序映射
   const roleOrder: Record<string, string[]> = {
-    strategic: ['ai8', 'ai4', 'ai7', 'ai9', 'ai11', 'ai10'], // 小智→书生→DeepSeek→星火→DeepR1→小度
-    creative: ['ai4', 'ai8', 'ai10', 'ai7', 'ai9', 'ai11'], // 书生→小智→小度→DeepSeek→星火→DeepR1
-    technical: ['ai7', 'ai11', 'ai9', 'ai8', 'ai4', 'ai10'], // DeepSeek→DeepR1→星火→小智→书生→小度
-    execution: ['ai9', 'ai11', 'ai7', 'ai8', 'ai4', 'ai10'], // 星火→DeepR1→DeepSeek→小智→书生→小度
-    review: ['ai10', 'ai8', 'ai4', 'ai7', 'ai9', 'ai11']    // 小度→小智→书生→DeepSeek→星火→DeepR1
+    strategic: ['ai8', 'ai4', 'ai7', 'ai9', 'ai11', 'ai10'], 
+    creative: ['ai4', 'ai8', 'ai10', 'ai7', 'ai9', 'ai11'], 
+    technical: ['ai7', 'ai11', 'ai9', 'ai8', 'ai4', 'ai10'], 
+    execution: ['ai9', 'ai11', 'ai7', 'ai8', 'ai4', 'ai10'], 
+    review: ['ai10', 'ai8', 'ai4', 'ai7', 'ai9', 'ai11']    
   };
   // 获取当前阶段的推荐顺序
   const recommendedOrder = roleOrder[phase];
@@ -41,15 +41,15 @@ export const groups: Group[] = [
     id: 'group1',
     name: '🚀 创业智囊团',
     description: '动态发言系统：战略规划→创新突破→技术实现→执行落地→复盘评估',
-    members: ['ai8', 'ai7', 'ai10', 'ai11', 'ai4', 'ai9'], // 小智, DeepSeek, 小度, DeepR1, 书生, 星火
-    speakingOrder: [], // 初始化时为空，首次讨论时生成
+    members: ['ai8', 'ai7', 'ai10', 'ai11', 'ai4', 'ai9'], 
+    speakingOrder: [], 
     currentSpeakerIndex: 0,
     discussionPhase: 'strategic',
     isGroupDiscussionMode: true,
     discussionRules: {
-      maxSpeakingTime: 120, // 2分钟/人
-      turnSwitchCondition: 'completion', // 完成发言后切换
-      emotionThreshold: 70 // 当压力指数>70时触发小度
+      maxSpeakingTime: 120, 
+      turnSwitchCondition: 'completion',
+      emotionThreshold: 70 
     }
   }
 ];
