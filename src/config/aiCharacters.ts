@@ -35,7 +35,7 @@ export const modelConfigs = [
   {
     model: "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
     apiKey: "DEEPSEEK_API_KEY",
-    baseURL: "https://api.siliconflow.cn/v1"
+    baseURL: "https://api.siliconflow.cn/v1/chat/completions"
   },
   
   // 新增书生配置
