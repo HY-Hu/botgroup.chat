@@ -202,7 +202,7 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
     {
       id: 'ai11',
       name: "DeepR1",
-      personality: "execution-specialist",
+      personality: "technical-specialist",
       model: "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
       apiKey: getConfig("deepseek-ai/DeepSeek-R1-0528-Qwen3-8B").apiKey,
       baseURL: getConfig("deepseek-ai/DeepSeek-R1-0528-Qwen3-8B").baseURL,
