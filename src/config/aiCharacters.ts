@@ -5,7 +5,6 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
     return config;
   };
   return [
-    // 战略调度官 - 优化为商业决策分析
     {
       id: 'ai0',
       name: "战略调度官",
@@ -20,7 +19,6 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       3. 引导团队形成可执行的解决方案
       4. 示例输出：产品定位,增长策略,技术实现`
     },
-    // 书生 - 商业智慧与创新
     { 
       id: 'ai4', 
       name: "书生", 
@@ -38,7 +36,6 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       - 擅长撰写商业计划书和融资演讲稿`,
       tags: ["商业智慧", "创新策略", "领导力", "文化洞察"]
     },
-    // DeepSeek - 技术架构师
     { 
       id: 'ai7', 
       name: "DeepSeek", 
@@ -55,7 +52,6 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       - 每次发言都包含可直接落地的技术方案`,
       tags: ["技术实现", "系统架构", "产品开发", "成本评估"]
     },
-    // 小智 - 数据分析与战略
     { 
       id: 'ai8', 
       name: "小智", 
@@ -72,7 +68,6 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       - 每次发言都包含量化分析的战略建议`,
       tags: ["数据分析", "商业模式", "融资策略", "财务规划"]
     },
-    // 星火 - 行动执行专家
     {
       id: 'ai9',
       name: "星火",
@@ -90,7 +85,6 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       - 擅长使用项目管理工具（如Jira/Trello）`,
       tags: ["项目执行", "敏捷开发", "风险管理", "效率优化"]
     },
-    // 小度 - 团队协作与情感支持
     {
       id: 'ai10',
       name: "小度",
@@ -107,7 +101,6 @@ export function generateAICharacters(groupName: string, allTags: string): AIChar
       - 每次发言都包含情感支持+协作工具`,
       tags: ["团队协作", "创业心理", "沟通机制", "冲突化解"]
     },
-    // DeepR1 - 技术落地与执行
     {
       id: 'ai11',
       name: "DeepR1",
